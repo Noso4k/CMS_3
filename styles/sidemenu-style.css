@@ -1,0 +1,139 @@
+/* Перенесено в body-header-style.css або не використовується */
+/* .body_content {
+    display: flex;
+    flex: 1;
+    overflow: auto;
+} */
+
+.sidebar {
+    padding-right: 0; /* Забираємо правий падінг */
+    width: 14rem; /* Фіксована ширина */
+    background-color: #0a192f; /* ТЕМНО-СИНІЙ ФОН */
+    height: 100%; /* Адаптивна висота */
+    box-sizing: border-box;
+    padding-top: 2rem; /* Відступ зверху */
+    padding-left: 1rem; /* Відступ зліва */
+    z-index: 90; /* Нижче хедера */
+    transition: width 0.3s ease, left 0.3s ease-in-out; /* Додано анімацію ширини */
+    position: sticky; /* Прилипаюче меню */
+    top: 0; /* Прилипає до верху */
+}
+
+.sidebar a {
+    display: block;
+    padding: 0.8rem 1rem; /* Змінено падінг */
+    margin-top: 0.5rem; /* Змінено відступ */
+    color: #a8b2d1; /* СІРУВАТО-СИНІЙ */
+    font-size: 1rem; /* Змінено розмір */
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap; /* Запобігання переносу тексту */
+    overflow: hidden; /* Ховаємо текст, що не вміщується */
+    text-overflow: ellipsis; /* Додаємо три крапки */
+    font-family: Calibri, sans-serif; /* Шрифт */
+}
+
+.sidebar a:hover {
+    color: #64ffda; /* АКЦЕНТНИЙ КОЛІР */
+    background-color: #162a4a; /* ТРОХИ СВІТЛІШИЙ ФОН */
+}
+.sidebar a.active { /* Стиль для активного посилання (додайте клас .active в HTML/JS) */
+     color: #64ffda;
+     background-color: #162a4a;
+     font-weight: bold;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1.5rem; /* Падінги */
+    background-color: #0a192f; /* Переконуємось, що фон темний */
+    width: calc(100% - 14rem); /* Розрахунок ширини */
+}
+
+
+/* Телефон: кнопка для бокового меню */
+.sidebar__toggle {
+    width: 2.5rem;
+    height: 2.5rem; /* Квадратна кнопка */
+    display: none; /* Ховаємо на десктопі */
+    position: fixed;
+    left: 0.5rem; /* Відступ зліва */
+    top: 0.5rem; /* Відступ зверху */
+    z-index: 300; /* Поверх усього */
+    background: #162a4a; /* Фон кнопки */
+    color: #64ffda; /* Колір іконки */
+    border: none;
+    padding: 0; /* Забираємо падінг */
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex; /* Для центрування іконки */
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem; /* Розмір іконки */
+}
+
+
+/* респонсівність для бокового меню */
+@media only screen and (max-width: 768px) {
+    .sidebar {
+        position: fixed; /* Фіксоване позиціонування */
+        top: 0;
+        left: -15rem; /* Сховано за межами екрану (ширина + відступ) */
+        width: 14rem; /* Ширина залишається */
+        height: 100vh; /* Повна висота */
+        transition: left 0.3s ease-in-out; /* Анімація появи */
+        z-index: 200; /* Вище основного контенту */
+        padding-top: 4rem; /* Більший відступ зверху через фіксований хедер */
+        background-color: #0a192f; /* Фон */
+        border-right: 1px solid #162a4a; /* Додамо роздільну лінію */
+    }
+    .sidebar.active {
+        left: 0; /* Показуємо меню */
+    }
+    .sidebar__toggle {
+        display: flex; /* Показуємо кнопку */
+        top: 0.6rem; /* Трохи нижче */
+        left: 0.6rem;
+    }
+    .main {
+        width: 100%; /* Повна ширина */
+        padding: 0 1rem; /* Менші падінги */
+        margin-top: 4rem; /* Відступ від фіксованого хедера */
+    }
+    /* Оверлей для затемнення основного контенту, коли меню відкрите */
+    body.sidebar-open .layout::after {
+         content: '';
+         position: fixed;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         background: rgba(10, 25, 47, 0.7);
+         z-index: 199; /* Під меню, але над контентом */
+         display: block;
+    }
+     body.sidebar-open .main {
+       
+         transform: translateX(50px); 
+     }
+}
+
+/* Якщо екран дуже вузький, можна зменшити ширину меню */
+@media only screen and (max-width: 480px) {
+     .sidebar {
+        width: 12rem;
+        left: -13rem;
+     }
+      .main {
+        margin-top: 3.5rem; /* Відступ від хедера */
+    }
+    .sidebar__toggle {
+        width: 2.2rem;
+        height: 2.2rem;
+        font-size: 1.1rem;
+    }
+}

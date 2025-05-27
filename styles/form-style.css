@@ -1,0 +1,223 @@
+.overlay-form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 25, 47, 0.85); /* НАПІВПРОЗОРИЙ ТЕМНО-СИНІЙ */
+    display: none;
+    z-index: 1000;
+    backdrop-filter: blur(5px); /* Ефект розмиття фону */
+}
+
+.overlay-form.active {
+    display: block;
+}
+
+#form-modal {
+    position: absolute;
+    display: none;
+    top: 15%; /* Трохи вище */
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 50%;
+    max-width: 600px; /* Максимальна ширина */
+    opacity: 0;
+    z-index: 1010; /* Вище ніж оверлей */
+    background: #162a4a; /* ТРОХИ СВІТЛІШИЙ СИНІЙ */
+    color: #ccd6f6; /* СВІТЛИЙ КОЛІР ТЕКСТУ */
+    height: auto;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6); /* Оновлена тінь */
+    padding: 2rem; /* Збільшено падінг */
+    text-align: left;
+    border-radius: 8px; /* Заокруглення */
+}
+
+
+/* Кнопка закриття в правому верхньому куті */
+#form-modal__close {
+    position: absolute;
+    top: 0.8rem; /* Змінено позицію */
+    right: 0.8rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem; /* Збільшено */
+    color: #a8b2d1; /* Сірувато-синій */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+#form-modal__close:hover {
+    color: #64ffda; /* Акцентний при наведенні */
+}
+
+#form-modal h2 { /* Стилізація заголовка форми */
+    color: #e6f1ff;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.6rem;
+}
+
+/* Контейнер для форми */
+.form-modal__container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem; /* Збільшено проміжок */
+    width: 100%;
+}
+
+.formLabels,
+.formFields {
+    display: flex;
+    flex-direction: column;
+    font-family: Calibri, sans-serif; /* Застосовуємо шрифт */
+}
+
+.formLabels {
+    gap: 1.8rem; /* Збільшено проміжок для відповідності полям */
+    width: 40%; /* Трохи вужче */
+    align-items: flex-start;
+    color: #a8b2d1; /* Сірувато-синій для лейблів */
+    padding-top: 0.5rem; /* Вирівнювання з полями вводу */
+    font-size: 0.9rem;
+}
+
+.formFields {
+    gap: 1rem; /* Збільшено проміжок */
+    width: 60%; /* Трохи ширше */
+}
+
+
+/* Поля вводу */
+.inputFields,
+select.inputFields { /* Застосовуємо стиль до select */
+    font-size: 0.9rem; /* Трохи збільшено */
+    padding: 0.7rem 0.8rem; /* Змінено падінг */
+    width: 100%; /* Повна ширина */
+    border: 1px solid #233554; /* Темніший синій бордер */
+    border-radius: 4px; /* Невелике заокруглення */
+    background: #0a192f; /* ТЕМНО-СИНІЙ ФОН */
+    color: #ccd6f6; /* СВІТЛИЙ ТЕКСТ */
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    transition: border-color 0.3s ease;
+}
+
+.inputFields:focus,
+select.inputFields:focus {
+    border-color: #64ffda; /* Акцентний бордер при фокусі */
+}
+
+/* Стилізація placeholder */
+.inputFields::placeholder {
+    color: #8892b0; /* Сірувато-синій */
+    opacity: 0.7;
+}
+
+/* Стрілка для select */
+select.inputFields {
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23ccd6f6" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* ЗМІНЕНО КОЛІР СТРІЛКИ НА #ccd6f6 */
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center; /* Позиція стрілки */
+    padding-right: 2.5rem; /* Місце для стрілки */
+}
+
+/* Стилі для опцій в select */
+select.inputFields option {
+    background: #162a4a;
+    color: #ccd6f6;
+}
+
+
+/* Стилі для кнопок */
+.form-modal__buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem; /* Збільшено проміжок */
+    margin-top: 2rem; /* Збільшено відступ */
+}
+
+#cancelButton,
+#saveButton {
+    padding: 0.7rem 1.5rem; /* Збільшено падінг */
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    font-family: Calibri, sans-serif; /* ЗМІНЕНО ШРИФТ */
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Кнопка Save (основна) */
+#saveButton {
+    background: #64ffda; /* АКЦЕНТНИЙ ФОН */
+    color: #0a192f; /* ТЕМНИЙ ТЕКСТ */
+}
+#saveButton:hover {
+    background: #a7fff6; /* Світліший акцентний */
+}
+
+/* Кнопка Cancel (другорядна) */
+#cancelButton {
+    background: none; /* Прозорий фон */
+    color: #64ffda; /* АКЦЕНТНИЙ КОЛІР */
+    border: 1px solid #64ffda; /* АКЦЕНТНИЙ БОРДЕР */
+}
+#cancelButton:hover {
+    background: rgba(100, 255, 218, 0.1); /* Напівпрозорий акцентний */
+}
+
+
+/* Медіа-запити */
+@media only screen and (max-width: 768px) { /* Змінено breakpoint */
+    #form-modal {
+        width: 75%;
+        top: 10%;
+    }
+    .form-modal__container {
+        flex-direction: column; /* Стовпчик на малих екранах */
+        gap: 0.5rem;
+    }
+    .formLabels,
+    .formFields {
+        width: 100%; /* Повна ширина */
+    }
+    .formLabels {
+        gap: 0.8rem; /* Менший проміжок */
+        padding-top: 0;
+        align-items: flex-start; /* Залишаємо зліва */
+    }
+     .formFields {
+        gap: 0.8rem;
+    }
+}
+
+@media only screen and (max-width: 480px) { /* Менший breakpoint */
+    #form-modal {
+        width: 90%;
+        padding: 1.5rem;
+    }
+     #form-modal h2 {
+        font-size: 1.4rem;
+     }
+    .formLabels {
+        font-size: 0.85rem;
+        gap: 0.7rem;
+    }
+    .inputFields,
+    select.inputFields {
+        font-size: 0.85rem;
+        padding: 0.6rem 0.7rem;
+    }
+    .form-modal__buttons {
+        gap: 0.8rem;
+    }
+     #cancelButton,
+    #saveButton {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+    }
+}

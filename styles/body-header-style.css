@@ -1,0 +1,411 @@
+/* загальне */
+
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Calibri, sans-serif; /* ЗМІНЕНО ШРИФТ */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Використовуємо min-height */
+    background-color: #0a192f; /* ТЕМНО-СИНІЙ ФОН */
+    color: #ccd6f6; /* СВІТЛИЙ КОЛІР ТЕКСТУ */
+}
+
+.layout {
+    width: 100%; /* Не vw, щоб уникнути горизонтального скролу */
+    display: flex;
+    flex: 1;
+}
+
+
+/* Хедер */
+
+.header {
+    background: #162a4a; /* ТРОХИ СВІТЛІШИЙ СИНІЙ */
+    max-width: 100%;
+    display: flex;
+    justify-content: flex-end; /* Змінено на flex-end для узгодження з .header__actions */
+    align-items: center;
+    box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.4); /* Тінь для темного фону */
+    position: relative;
+    z-index: 98;
+    padding: 0.5rem 0; /* Додано невеликий падінг */
+}
+
+.header__logo {
+    position: relative;
+    width: fit-content;
+    background: #0a192f; /* ТЕМНІШИЙ СИНІЙ ДЛЯ ЛОГО */
+    margin: 0 auto 0 5%; /* Зменшено відступ */
+    color: #64ffda; /* АКЦЕНТНИЙ КОЛІР (Бірюзовий) */
+    padding: 1rem 1.25rem;
+    flex-shrink: 0;
+    overflow: visible;
+}
+
+#header__title {
+    font-size: 1.125rem;
+    transition: transform 0.5s ease-in-out;
+    margin: 0; /* Забрано margin-bottom */
+    font: lighter 1.875rem Calibri, sans-serif; /* ЗМІНЕНО ШРИФТ */
+    background-color: transparent; /* Фон вже є на .header__logo */
+    padding-right: 0.3125rem;
+    color: #64ffda; /* АКЦЕНТНИЙ КОЛІР */
+}
+
+.header__logo:hover #header__title {
+    transform: translateX(1.5rem); /* Зменшено зсув */
+}
+
+
+/* Випадні менюшки */
+
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Збільшено проміжок */
+    margin-right: 5%;
+}
+
+.notification,
+.user {
+    position: relative;
+}
+
+/* Стилізація кнопок хедера */
+.notification button,
+.user button {
+    height: auto; /* Автоматична висота */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #64ffda; /* АКЦЕНТНИЙ БОРДЕР */
+    background: none; /* Прозорий фон */
+    color: #ccd6f6; /* Світлий текст */
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    font-family: inherit;
+    padding: 0.5rem 0.8rem; /* Падінги */
+    border-radius: 4px; /* Невелике заокруглення */
+}
+
+.notification button {
+    width: auto; /* Автоматична ширина */
+    padding: 0.5rem; /* Однаковий падінг для іконки */
+    margin-right: 0; /* Забрано margin */
+}
+
+.user button {
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
+.notification button:hover,
+.user button:hover {
+    background-color: rgba(100, 255, 218, 0.1); /* Напівпрозорий акцентний фон */
+    color: #64ffda; /* Акцентний колір тексту */
+}
+
+.notification a, /* Посилання тепер не потрібні навколо кнопок */
+.user a {
+    display: block;
+    color: #ccd6f6; /* Світлий текст */
+    text-decoration: none;
+    padding: 0.625rem 0.9375rem;
+    font-size: 0.875rem;
+}
+
+.user__menu,
+.notification__dropdown {
+    display: none;
+    background: #162a4a; /* ТРОХИ СВІТЛІШИЙ СИНІЙ */
+    position: absolute;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Оновлена тінь */
+    padding: 0.5rem; /* Зменшено падінг */
+    border-radius: 4px;
+    z-index: 100;
+    min-width: 15rem; /* Збільшено ширину */
+    right: 0; /* Вирівнювання по правому краю для обох */
+}
+
+.notification__dropdown {
+     right: 0; 
+}
+
+.notification__item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.75rem 0.5rem; /* Змінено падінг */
+    border-bottom: 1px solid #0a192f; /* Розділювач */
+}
+.notification__item:last-child {
+    border-bottom: none; /* Забрати бордер у останнього */
+}
+
+.notification__item i {
+    font-size: 1.25rem;
+    color: #ccd6f6;
+}
+
+.notification__text {
+    display: flex;
+    flex-direction: column;
+    color: #ccd6f6; /* Світлий текст */
+}
+
+.notification__sender {
+    font-weight: bold;
+    color: #e6f1ff; /* Ще світліший текст для імені */
+}
+
+.notification__message {
+    background: #0a192f; /* Темний фон для повідомлення */
+    border: 1px solid #162a4a;
+    padding: 0.3125rem 0.625rem;
+    border-radius: 0.625rem;
+    margin-top: 0.1875rem;
+    box-shadow: none; /* Забрано тінь */
+    color: #a8b2d1; /* Трохи темніший світлий текст */
+}
+
+.notification:hover .notification__dropdown,
+.user:hover .user__menu {
+    display: block;
+}
+
+/* Hover ефекти для пунктів меню */
+.user__menu a:hover,
+.notification__item:hover {
+    background-color: #233554; /* Темніший синій при наведенні */
+    color: #64ffda; /* Акцентний колір */
+}
+.user__menu a:hover *,
+.notification__item:hover * {
+    color: inherit; /* Успадкування кольору для вкладених елементів */
+}
+
+
+.user__icon,
+.notifyMessageIcon {
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #64ffda; /* Акцентний бордер */
+    padding: 2px; /* Невеликий відступ від бордера */
+}
+
+.user__icon {
+    width: 2rem; /* Трохи збільшено */
+    height: 2rem;
+}
+
+.notifyMessageIcon {
+    width: 2.5rem; /* Трохи збільшено */
+    height: 2.5rem;
+}
+
+
+/* Анімація для колокольчика */
+@keyframes ring { /* Залишаємо як є */
+    0% { transform: rotate(0deg); }
+    20%{ transform: rotate(-15deg); }
+    40%{ transform: rotate(15deg); }
+    60%{ transform: rotate(-15deg); }
+    80%{ transform: rotate(15deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes dot-blink { /* Залишаємо як є */
+    0%{ opacity: 0; }
+    50%{ opacity:1; }
+    100%{ opacity: 0; }
+}
+
+#notification__button i {
+    animation: ring 0.5s ease-in-out infinite;
+    animation-play-state: paused;
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit; /* Успадкування кольору від кнопки */
+}
+
+#notification__button.active i {
+    animation-play-state: running;
+}
+
+/* Стилі для червоної точки */
+.notification__dot {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.3rem;
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: red;
+    border-radius: 50%;
+    border: 1px solid #0a192f;
+    animation: dot-blink 2s infinite; 
+    display: block;     
+}
+
+/* Стилі для червоної точки */
+.notification__dot {
+    position: absolute;
+    top: 0.3rem; /* Скориговано позицію */
+    right: 0.3rem; /* Скориговано позицію */
+    width: 0.5rem; /* Зменшено */
+    height: 0.5rem;
+    background-color: red;
+    border-radius: 50%;
+    border: 1px solid #0a192f; /* Бордер під колір фону */
+    animation: dot-blink 2s infinite;
+    display: none; /* Ховаємо за замовчуванням */
+}
+
+#notification__button.has-notifications .notification__dot {
+    display: block; /* Показуємо точку */
+}
+
+
+/* респонсівність на хедері */
+@media screen and (max-width: 768px) {
+    .header__logo {
+        margin-left: 10%; /* Збільшено відступ для кнопки меню */
+        padding: 0.8rem 1rem;
+    }
+    #header__title {
+        font-size: 1.5rem; /* Трохи менший */
+    }
+    .header__actions {
+        gap: 0.5rem;
+        margin-right: 2%;
+    }
+    .notification button,
+    .user button {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+    }
+     .user__icon {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+    .notifyMessageIcon {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+    .notification__dropdown {
+         min-width: 12rem;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .header__logo {
+        margin-left: 3rem; /* Ще більше місця для кнопки меню */
+        padding: 0.6rem 0.8rem;
+    }
+     #header__title {
+        font-size: 1.2rem;
+    }
+    .header__actions {
+        gap: 0.3rem;
+        margin-right: 1rem;
+    }
+    .notification button,
+    .user button {
+        padding: 0.3rem 0.5rem;
+        border-width: 1px; /* Тонший бордер */
+    }
+    .user button h4.user__name { /* Ховаємо текст імені юзера */
+        display: none;
+    }
+    .user__icon {
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+    .notifyMessageIcon {
+        width: 2rem;
+        height: 2rem;
+    }
+    .notification__dropdown {
+        min-width: 11rem;
+    }
+     .user__menu {
+        right: 0;
+    }
+    .notification__dot {
+      top: 0.1rem;
+      right: 0.1rem;
+      width: 0.4rem;
+      height: 0.4rem;
+    }
+}
+
+/* --- Стилі, перенесені з table-style.css (якщо вони стосуються хедера сторінки) --- */
+.table__header {
+    width: 90%; /* Зроблено відносною ширину */
+    max-width: 1200px; /* Обмеження максимальної ширини */
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Вирівнювання по центру */
+    padding: 1.5rem 0; /* Збільшено вертикальний падінг */
+    margin: 0 auto; /* Центрування */
+}
+
+.table__header h1 {
+    margin: 0;
+    color: #e6f1ff; /* Дуже світлий колір для заголовка */
+    font-size: 1.8rem; /* Трохи збільшено */
+}
+
+.table__button {
+    display: flex;
+    gap: 0.8rem; /* Збільшено проміжок */
+}
+
+/* Стилізація кнопок над таблицею (напр. Add) */
+.table__button button,
+.student-table__button--form { /* Стиль для кнопки Add з першого прикладу */
+    background-color: #64ffda; /* Акцентний фон */
+    color: #0a192f; /* Темний текст */
+    border: none;
+    padding: 0.6rem 1rem; /* Збільшено падінг */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table__button button i,
+.student-table__button--form i{
+    margin-right: 0.4rem; /* Відступ для іконки, якщо є */
+    font-size: 1rem;
+}
+.student-table__button--form i{ /* Якщо кнопка тільки іконка */
+    margin-right: 0;
+}
+
+.table__button button:hover,
+.student-table__button--form:hover {
+    background-color: #a7fff6; /* Світліший акцентний при наведенні */
+
+    
+}
+

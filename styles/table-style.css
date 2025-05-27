@@ -1,0 +1,398 @@
+/* Таблиця */
+
+.table__container {
+    /* width: calc(100vw - 14rem); */ /* Розрахунок тепер не потрібен, якщо .main має правильну ширину */
+    width: 100%; /* Займає всю ширину .main */
+    /* margin-left: auto; */ /* Центрування не потрібне, якщо .main центрує */
+    /* margin-right: auto; */
+    overflow-x: auto; /* Горизонтальний скрол для таблиці */
+    margin-bottom: 1.5rem; /* Збільшено відступ */
+    /* width: 90%; */ /* Замінено на 100% */
+    background-color: #162a4a; /* Фон контейнера таблиці */
+    border-radius: 8px; /* Заокруглення */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Тінь */
+}
+
+.table__wrapper {
+    overflow: auto; /* Залишаємо скрол для таблиці всередині */
+    max-height: 70vh; /* Обмеження висоти, щоб пагінація була видима */
+    border-radius: 8px; /* Успадкування заокруглення */
+}
+
+#student-table {
+    white-space: nowrap;
+    margin: 0; /* Забираємо авто-відступи */
+    border-collapse: separate; /* Separate для border-spacing */
+    border-spacing: 0;
+    /* table-layout: fixed; */ /* Може спричинити проблеми з шириною, краще auto */
+    background-color: transparent; /* Фон тепер на .table__container */
+    /* box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); */ /* Тінь на контейнері */
+    /* border-radius: 0.5rem; */ /* Заокруглення на контейнері */
+    width: 100%; /* Повна ширина контейнера */
+    min-height: auto; /* Автоматична висота */
+    border: none; /* Забираємо зовнішній бордер */
+}
+
+thead {
+    background: #233554; /* Темніший синій для шапки */
+    color: #e6f1ff; /* Дуже світлий текст */
+}
+
+table td,
+table th {
+    text-align: left; /* Вирівнювання по лівому краю */
+    border: none; /* Забираємо всі бордери */
+    border-bottom: 1px solid #0a192f; /* Горизонтальні роздільники */
+    padding: 0.9rem 1rem; /* Збільшено падінги */
+    white-space: nowrap;
+    font-family: Calibri, sans-serif; /* Шрифт */
+    color: #ccd6f6; /* Світлий текст */
+    vertical-align: middle; /* Вирівнювання по центру вертикалі */
+}
+table th { /* Стилі для заголовків */
+    padding: 1rem 1rem; /* Більший падінг для заголовків */
+    font-weight: bold;
+    text-transform: none; /* Забираємо uppercase */
+    color: #e6f1ff; /* Світліший текст для заголовків */
+}
+table tbody tr:last-child td,
+table tbody tr:last-child th {
+    border-bottom: none; /* Забираємо бордер у останнього рядка */
+}
+
+
+tr:nth-child(even) {
+    background: rgba(10, 25, 47, 0.3); /* Легкий фон для парних рядків */
+}
+tr:hover {
+    background-color: #233554; /* Фон при наведенні */
+}
+
+table thead th {
+    /* padding: 0.1875rem; */ /* Падінг вже встановлено */
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: #233554; /* Фон для прилипаючої шапки */
+}
+
+
+/* Фіксація колонок (потребує уважної перевірки) */
+/* Адаптація кольорів для темної теми */
+
+table thead th:first-child, /* Чекбокс */
+table tbody th { /* Чекбокс в тілі */
+    position: sticky;
+    left: 0;
+    z-index: 11;
+    background-color: #162a4a; /* Основний фон таблиці */
+    border-right: 1px solid #0a192f; /* Вертикальний роздільник */
+}
+
+table thead th:nth-child(2), /* Name */
+table tbody td:nth-child(2) { /* Name */
+    position: sticky;
+    left: 3.5rem; /* Приблизна ширина першої колонки (треба підібрати) */
+    z-index: 10;
+    background-color: #162a4a;
+    border-right: 1px solid #0a192f;
+}
+
+/* Забезпечення правильного фону для прилипаючих заголовків */
+table thead th:first-child,
+table thead th:nth-child(2) {
+    background-color: #233554; /* Фон шапки */
+    color: #e6f1ff; /* Текст шапки */
+}
+
+/* Важливо: Переконайтесь, що у tbody th дійсно лише чекбокси */
+table tbody th {
+    padding: 0.9rem 1rem; /* Падінг як у td */
+    text-align: center; /* Центруємо чекбокс */
+}
+table tbody th input[type="checkbox"] { /* Стиль для чекбоксів */
+     cursor: pointer;
+}
+
+/* Стилізація інструментів (кнопок Edit/Delete) */
+table td:last-child {
+    text-align: center; /* Центруємо кнопки */
+}
+table td:last-child button {
+    background: none;
+    border: none;
+    color: #a8b2d1; /* Сірувато-синій */
+    cursor: pointer;
+    padding: 0.3rem 0.5rem;
+    font-size: 1.1rem; /* Розмір іконок */
+    transition: color 0.3s ease;
+}
+table td:last-child button:hover {
+    color: #64ffda; /* Акцентний при наведенні */
+}
+
+
+/* Пагінація для таблиці */
+#pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem; /* Змінено падінг */
+    background-color: #0a192f; /* ТЕМНО-СИНІЙ ФОН */
+    font-weight: bold;
+    font-family: Calibri, sans-serif; /* Шрифт */
+    font-size: 0.875rem;
+    color: #a8b2d1; /* Сірувато-синій */
+    border-top: 1px solid #162a4a; /* Роздільник зверху */
+    border-radius: 0 0 8px 8px; /* Заокруглення знизу */
+}
+
+#pagination a { /* Стилізація посилань на сторінки */
+    color: #a8b2d1;
+    padding: 0.5rem 0.8rem; /* Змінено падінг */
+    margin: 0 0.2rem; /* Змінено відступи */
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px; /* Заокруглення */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+#pagination a:hover {
+    background-color: #162a4a;
+    color: #ccd6f6;
+}
+
+#pagination a.active { /* Стиль активної сторінки */
+    border-radius: 4px; /* Або 50% для кола */
+    background-color: #64ffda; /* АКЦЕНТНИЙ ФОН */
+    color: #0a192f; /* ТЕМНИЙ ТЕКСТ */
+    font-weight: bold;
+}
+
+#pageNumbersContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; /* Вирівнювання */
+}
+
+#pageNumbers {
+    display: flex;
+    padding: 0; /* Забираємо падінг */
+}
+
+input[type=number]#pageNumberInput { /* Стилізація поля вводу номера сторінки */
+    width: 3rem;
+    height: 2.2rem; /* Висота як у кнопок/посилань */
+    border: 1px solid #233554;
+    text-align: center;
+    margin: 0 0.5rem; /* Відступи */
+    border-radius: 4px;
+    outline: none;
+    background-color: #162a4a; /* Фон */
+    color: #ccd6f6; /* Текст */
+    font-family: Calibri, sans-serif;
+    font-size: 0.875rem;
+}
+input[type=number]#pageNumberInput:focus {
+    border-color: #64ffda;
+}
+
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#goToPage {
+    display: flex;
+    align-items: center;
+    margin-left: 0.5rem;
+    margin-right: 0; /* Забираємо правий відступ */
+}
+
+#goToPageButton { /* Стилізація кнопки Confirm */
+    height: 2.2rem;
+    padding: 0 1rem; /* Падінг */
+    align-items: center;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    background-color: #64ffda; /* Акцентний фон */
+    color: #0a192f; /* Темний текст */
+    cursor: pointer;
+    font-family: Calibri, sans-serif;
+    font-size: 0.875rem;
+    transition: background-color 0.3s ease;
+}
+#goToPageButton:hover {
+    background-color: #a7fff6;
+}
+
+#pagination__entries {
+    display: flex;
+    padding-left: 0; /* Забираємо лівий падінг */
+    white-space: nowrap; /* Запобігання переносу */
+}
+
+#pagination__entries span {
+    margin-left: 0.3125rem;
+    margin-right: 0.3125rem;
+    color: #ccd6f6; /* Світлий текст */
+    font-weight: normal; /* Звичайний шрифт */
+}
+
+@media (max-width: 1100px) {
+    #pagination {
+        flex-direction: column; /* Стовпчик */
+        align-items: center; /* Центрування */
+        gap: 0.8rem; /* Проміжок між елементами */
+    }
+     #pageNumbersContainer {
+        justify-content: center; /* Центрування номерів сторінок */
+        width: 100%; /* Повна ширина */
+    }
+    #pagination__entries {
+        order: 1; /* Переміщуємо вниз */
+        margin-top: 0.5rem;
+    }
+}
+
+
+/* Для маленьких екранів (телефони) */
+@media (max-width: 768px) {
+    input[type=number]#pageNumberInput,
+    #goToPageButton,
+    #goToPage span { 
+         display: none; 
+    }
+    #pagination {
+         padding: 0.6rem;
+         font-size: 0.8rem;
+    }
+    #pagination a {
+        padding: 0.4rem 0.6rem;
+        margin: 0 0.1rem;
+    }
+    #pageNumbersContainer {
+         gap: 0.2rem; /* Менший проміжок */
+    }
+     #goToPage {
+        margin-left: 0.3rem;
+     }
+}
+@media (max-width: 480px) {
+     #pagination__entries {
+        font-size: 0.75rem; /* Ще менший текст */
+     }
+      input[type=number]#pageNumberInput,
+      #goToPageButton {
+           display: none; /* Точно ховаємо на дуже малих */
+      }
+       #goToPage {
+           display: none;
+       }
+}
+
+
+/* Модальне вікно підтвердження видалення */
+/* Використовуємо стилі з form-style для .overlay-form */
+/* Сам контент модалки: */
+#confirmDeleteModal .modalDeleteWindow { /* Додаємо клас модалці для стилізації */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #162a4a; /* Фон модалки */
+    padding: 2rem; /* Падінги */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6); /* Тінь */
+    border-radius: 8px;
+    z-index: 1010; /* Поверх оверлею */
+    text-align: center;
+    color: #ccd6f6; /* Світлий текст */
+    width: 90%; /* Ширина */
+    max-width: 400px; /* Макс. ширина */
+    font-family: Calibri, sans-serif;
+}
+
+#confirmDeleteModal p#modal__text { /* Текст питання */
+    margin: 0 0 1.5rem 0; /* Відступ знизу */
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+#confirmDeleteModal p#modal__text strong { /* Виділення імені */
+    color: #e6f1ff; /* Світліший колір */
+}
+
+/* Кнопки в модалці */
+#confirmDeleteModal .modal-content__button {
+    margin: 0 0.5rem; /* Відступи між кнопками */
+    padding: 0.7rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Кнопка підтвердження (Так) */
+#confirmDeleteModal .modal-content__button--confirm {
+    background-color: #ff4d4d; /* Червоний для небезпечної дії */
+    color: white;
+}
+#confirmDeleteModal .modal-content__button--confirm:hover {
+    background-color: #ff7979; /* Світліший червоний */
+}
+
+/* Кнопка скасування (Скасувати) */
+#confirmDeleteModal .modal-content__button--cancel {
+    background-color: transparent;
+    color: #64ffda; /* Акцентний */
+    border: 1px solid #64ffda;
+}
+#confirmDeleteModal .modal-content__button--cancel:hover {
+    background-color: rgba(100, 255, 218, 0.1); /* Акцентний фон */
+}
+
+
+/* Статуси */
+.status-indicator { /* Загальний клас для кружечка */
+    width: 0.75rem; /* Збільшено */
+    height: 0.75rem;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 0.5rem; /* Відступ від тексту (якщо є) */
+    vertical-align: middle; /* Вирівнювання */
+}
+
+.status-active {
+    background-color: #52cc7a; /* Яскраво-зелений */
+    box-shadow: 0 0 5px #52cc7a; /* Легке світіння */
+}
+
+.status-inactive {
+    background-color: #ff4d4d; /* Червоний */
+     box-shadow: 0 0 5px #ff4d4d;
+}
+
+/* Адаптація розміру кружечків для мобільних */
+@media (max-width: 768px) {
+    .status-indicator {
+        width: 0.6rem;
+        height: 0.6rem;
+    }
+    table td, table th {
+        padding: 0.7rem 0.8rem; /* Менші падінги */
+        font-size: 0.9rem; /* Менший шрифт */
+    }
+    table thead th {
+        padding: 0.8rem 0.8rem;
+    }
+     /* Приховування менш важливих колонок на мобільних (приклад) */
+    /*
+    table th:nth-child(4), table td:nth-child(4), // Group
+    table th:nth-child(6), table td:nth-child(6)  // Birthday
+    {
+        display: none;
+    }
+    */
+}

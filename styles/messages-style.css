@@ -1,0 +1,273 @@
+.chat-container {
+    display: flex;
+    gap: 1.5rem; /* Збільшено */
+    max-width: 100%;
+    padding: 1.5rem; /* Збільшено */
+    height: calc(100vh - 100px); /* Розрахунок висоти (приблизно, залежить від хедера) */
+    width: 100%;
+    color: #ccd6f6; /* Базовий світлий текст */
+}
+
+.chat-sidebar {
+    width: 20rem; /* Збільшено */
+    background: #162a4a; /* ТРОХИ СВІТЛІШИЙ СИНІЙ */
+    padding: 1.5rem;
+    padding-top: 1.5rem; /* Змінено */
+    border-radius: 8px;
+    height: 100%; /* Займає всю висоту контейнера */
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-sidebar h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #e6f1ff; /* Дуже світлий */
+}
+
+.new-chat-btn {
+    background: none;
+    border: 1px solid #64ffda;
+    color: #64ffda; /* Акцентний */
+    cursor: pointer;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: Calibri, sans-serif;
+}
+.new-chat-btn:hover {
+    background-color: rgba(100, 255, 218, 0.1);
+}
+
+.chat-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto; /* Додано скрол */
+    flex-grow: 1; /* Займає доступний простір */
+}
+
+.chat-room {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem; /* Збільшено */
+    border-radius: 4px;
+    cursor: pointer;
+    background: transparent; /* Прозорий за замовчуванням */
+    margin-bottom: 0.5rem; /* Збільшено */
+    transition: background-color 0.3s ease;
+    color: #a8b2d1; /* Сірувато-синій */
+}
+.chat-room:hover {
+    background: #233554; /* Темніший синій при наведенні */
+    color: #ccd6f6;
+}
+
+.chat-room.active {
+    background: #233554; /* Темніший синій для активного */
+    color: #64ffda; /* Акцентний текст */
+}
+
+.chat-main {
+    flex: 1;
+    background: #0a192f; /* ТЕМНО-СИНІЙ ФОН */
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #162a4a; /* Бордер */
+    height: 100%;
+}
+
+.chat-header { /* Додатковий блок для імені чату/учасників */
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #162a4a;
+    margin-bottom: 1rem;
+    color: #e6f1ff;
+    font-weight: bold;
+}
+
+.chat-members { /* Можливо, цей блок тепер у .chat-header */
+    display: flex;
+    gap: 0.5rem;
+    /* margin-bottom: 0.625rem; */ /* Перенесено */
+}
+
+.chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 100%; /* Адаптивна висота */
+    padding: 1rem;
+    /* border: 1px solid #162a4a; */ /* Забрано зайвий бордер */
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Збільшено проміжок */
+    margin-bottom: 1rem; /* Відступ від поля вводу */
+}
+
+.message {
+    display: flex;
+    align-items: flex-end; /* Вирівнювання по низу */
+    gap: 0.5rem;
+    max-width: 75%; /* Обмеження ширини повідомлення */
+}
+
+.received {
+    justify-content: flex-start;
+    align-self: flex-start; /* Притискаємо до лівого краю */
+}
+
+.sent {
+    justify-content: flex-end;
+    align-self: flex-end; /* Притискаємо до правого краю */
+}
+
+.message-content {
+    padding: 0.8rem 1rem; /* Збільшено */
+    border-radius: 12px; /* Більше заокруглення */
+    background: #162a4a; /* Фон для отриманих */
+    color: #ccd6f6;
+    line-height: 1.4; /* Покращення читабельності */
+    word-wrap: break-word; /* Перенос довгих слів */
+}
+
+.sent .message-content {
+    background: #233554; /* Фон для відправлених */
+    color: #e6f1ff; /* Світліший текст */
+}
+
+/* Стилі для іконки користувача біля повідомлення (якщо є) */
+.message img.user-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 1px solid #233554;
+}
+.sent .message img.user-avatar {
+    /* Можна приховати для відправлених */
+    display: none;
+}
+
+.chat-input {
+    display: flex;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #162a4a; /* Розділювач */
+}
+
+.chat-input input {
+    flex-grow: 1;
+    padding: 0.8rem 1rem; /* Збільшено */
+    border: 1px solid #233554;
+    border-radius: 20px; /* Округле поле вводу */
+    background: #162a4a; /* Фон поля вводу */
+    color: #ccd6f6;
+    outline: none;
+    font-family: Calibri, sans-serif;
+    font-size: 0.9rem;
+}
+.chat-input input:focus {
+    border-color: #64ffda;
+}
+
+.send-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem; /* Збільшено */
+    cursor: pointer;
+    color: #64ffda; /* Акцентний колір */
+    padding: 0 0.5rem; /* Невеликий падінг */
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+.send-btn:hover {
+    color: #a7fff6; /* Світліший акцентний */
+}
+
+/* Кнопки для мобільного меню чату */
+.chat-toggle {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #64ffda;
+    color: #0a192f;
+    padding: 0.8rem 0.5rem; /* Змінено */
+    border-radius: 0 4px 4px 0; /* Заокруглення з одного боку */
+    cursor: pointer;
+    z-index: 28;
+    border: none;
+    display: none; /* Ховаємо за замовчуванням */
+}
+
+.chat-open {
+    left: 0;
+}
+
+.chat-close {
+    right: 0; /* За замовчуванням прихована */
+    left: auto; /* Перевизначаємо left */
+     border-radius: 4px 0 0 4px; /* Заокруглення з іншого боку */
+     background: #233554; /* Інший фон для кнопки закриття */
+     color: #64ffda;
+}
+
+/* Респонсивність для чату */
+@media (max-width: 768px) {
+    .chat-container {
+        flex-direction: column; /* Стовпчик */
+        padding: 0; /* Забираємо падінг */
+        height: calc(100vh - 60px); /* Адаптуємо висоту під мобільний хедер */
+        position: relative; /* Для позиціонування кнопок */
+        overflow: hidden; /* Ховаємо скрол контейнера */
+    }
+    .chat-sidebar {
+        width: 80%; /* Ширина меню */
+        max-width: 300px; /* Максимальна ширина */
+        height: 100%; /* Повна висота */
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: #162a4a; /* Фон */
+        z-index: 100; /* Поверх усього */
+        transform: translateX(-100%); /* Сховано за замовчуванням */
+        transition: transform 0.3s ease;
+        border-radius: 0; /* Забираємо заокруглення */
+    }
+    .chat-sidebar.active {
+        transform: translateX(0); /* Показуємо */
+    }
+    .chat-main {
+        width: 100%; /* Повна ширина */
+        height: 100%; /* Повна висота */
+        border-radius: 0;
+        border: none; /* Забираємо бордер */
+        padding: 1rem; /* Падінг */
+    }
+    .chat-toggle {
+        display: flex; /* Показуємо кнопки */
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Логіка показу/приховування кнопок */
+    .chat-open { /* Показуємо кнопку відкриття */
+         display: flex;
+    }
+     .chat-sidebar.active ~ .chat-open { /* Ховаємо кнопку відкриття, коли меню відкрите */
+        display: none;
+    }
+    .chat-sidebar.active ~ .chat-close { /* Показуємо кнопку закриття, коли меню відкрите */
+        display: flex;
+        right: 0; /* Переконуємось, що вона справа */
+        left: auto;
+    }
+    .message {
+      max-width: 85%; /* Трохи ширші повідомлення на мобілках */
+    }
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="icons/main_icon.png">
+
+<link rel="stylesheet" href="/styles/body-header-style.css">
+<link rel="stylesheet" href="/styles/sidemenu-style.css">
+<link rel="stylesheet" href="/styles/messages-style.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+ <title>Student Management</title>
+</head>
+<body>
+<!-- Хедер -->
+<header class="header">
+    <div class="header__logo">
+        <h3 id="header__title">CMS</h3>
+    </div>
+
+    <div class="header__actions">
+        <div class="notification">
+            <a href="messages.html">
+                <button id="notification__button">
+                    <i class="fa-regular fa-bell fa-xl"></i>
+                    <span class="notification__dot"></span> <!-- Червона точка -->
+                </button>
+            </a>            
+            <div class="notification__dropdown">
+                <!-- Повідомлення на сайті-->
+                <div class="notification__item">
+                    <img src="/icons/message-cat-1.png" alt="User Icon" class="notifyMessageIcon">
+                    <div class="notification__text">
+                        <span class="notification__sender">Admin</span>
+                        <div class="notification__message">New update available</div>
+                    </div>
+                </div>
+                <div class="notification__item">
+                    <img src="/icons/message-cat-2.png" alt="User Icon" class="notifyMessageIcon">
+                    <div class="notification__text">
+                        <span class="notification__sender">Andriy</span>
+                        <div class="notification__message">Hi! Brooooo</div>
+                    </div>
+                </div>
+                <div class="notification__item">
+                    <img src="/icons/message-cat-3.png" alt="User Icon" class="notifyMessageIcon">
+                    <div class="notification__text">
+                        <span class="notification__sender">Anniii228</span>
+                        <div class="notification__message">Comment my post!!!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="user">
+            <!-- Юзер сайту-->
+            <button class="user__button">
+                <img src="/icons/user-cat.png" alt="User Icon" class="user__icon">
+                <h4 class="user__name">Illia Babuch</h4>
+            </button>
+            <div class="user__menu">
+                <a href="#" class="user__menu-item">Profile</a>
+                <a href="#" class="user__menu-item">Log out</a>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Контент сторінки -->
+<div class="layout">
+    <!-- Кнопка відкриття меню збоку (для малих екранів) -->
+    <button id="sidebarToggle" class="sidebar__toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+<!-- Бокове меню-->
+    <nav class="sidebar">
+        <a href="dashboard.html" class="sidebar__link">Dashboard</a>
+        <a href="/students.html" class="sidebar__link">Students</a>
+        <a href="tasks.html" class="sidebar__link">Tasks</a>
+    </nav>
+    <main class="main">
+    
+     <h1>Messages</h1>
+     <div class="chat-toggle chat-open" onclick="toggleChatSidebar()">>></div>
+     <div class="chat-toggle chat-close" onclick="toggleChatSidebar()">>></div>
+     <div class="chat-container">
+         <div class="chat-sidebar">
+             <h2>Chat room</h2>
+             <button class="new-chat-btn">+ New chat room</button>
+             <ul class="chat-list">
+                 <li class="chat-room active"><span class="chat-icon">👤</span> Admin</li>
+                 <li class="chat-room"><span class="chat-icon">👤</span> Annak Sogar</li>
+                 <li class="chat-room"><span class="chat-icon">👤</span> Johnan Bizz</li>
+                 <li class="chat-room"><span class="chat-icon">👤</span> Ivaniv Vlad</li>
+             </ul>
+         </div>
+         
+         <div class="chat-main">
+             
+             <h2>Chat room Admin</h2>
+             <div class="chat-members">
+                 <span class="member-icon">👤</span>
+                 <span class="member-icon">👤</span>
+                 <span class="member-icon">👤</span>
+                 <button class="add-member">+</button>
+             </div>
+             
+             <div class="chat-messages">
+                 <div class="message received">
+                     <span class="notification__sender">Admin</span>
+                     <div class="message-content"></div>
+                 </div>
+                 <div class="message sent">
+                     <div class="message-content"></div>
+                     <span class="notification__sender">Me</span>
+                 </div>
+             </div>
+             
+             <div class="chat-input">
+                 <input type="text" placeholder="Type a message...">
+                 <button class="send-btn">➤</button>
+             </div>
+         </div>
+     </div>
+
+    </main>
+</div>
+<!-- Скрипти-->
+<script>
+   function toggleChatSidebar() {
+    const sidebar = document.querySelector(".chat-sidebar");
+    const chatOpen = document.querySelector(".chat-open");
+    const chatClose = document.querySelector(".chat-close");
+
+    sidebar.classList.toggle("active");
+
+    if (sidebar.classList.contains("active")) {
+        chatOpen.style.display = "none"; // Ховаємо кнопку відкриття
+        chatClose.style.display = "block"; // Показуємо кнопку закриття
+    } else {
+        chatOpen.style.display = "block"; // Показуємо кнопку відкриття
+        chatClose.style.display = "none"; // Ховаємо кнопку закриття
+    }
+}
+    </script> 
+<script src="/scripts/sidemenu-script.js"></script>
+<script src="/scripts/animation-script.js"></script>
+</body>
+</html>
